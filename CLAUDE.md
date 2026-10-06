@@ -29,11 +29,15 @@ src/
   app/
     layout.tsx      Root layout: fonts, default metadata, Header/Footer
     page.tsx        Home
+    services/       Services page (renders lib/content.ts services, anchor per slug)
+    about/          About page
+    contact/        Contact page, ContactForm (client) and actions.ts (Server Action)
     globals.css     Tailwind import + brand theme tokens
     icon.svg        Favicon
-    (services/, about/, contact/ to follow)
-  components/       Shared UI (Container, Header, MobileNav, Footer, Logo, LogoMark)
-  lib/site.ts       Site-wide constants: name, URL, description, nav links
+  components/       Shared UI (Container, Header, MobileNav, Footer, Logo, LogoMark,
+                    PageHeader, CtaBand, CheckIcon)
+  lib/site.ts       Site-wide constants: name, owner, email, URL, nav links
+  lib/content.ts    Shared content: services, sectors, audiences, credential, career
 ```
 
 ## Decisions
@@ -52,13 +56,18 @@ src/
 - **Logo:** the supplied originals (black PNGs) are in `brand/`. `components/LogoMark.tsx` is the
   sun-and-clipboard icon redrawn as SVG so it can be recoloured (rays default to amber);
   `components/Logo.tsx` pairs it with the wordmark set in Outfit. `app/icon.svg` is the favicon.
-- **Content:** page copy lives inline in each page as small arrays/objects. There is
+- **Content:** shared copy lives in `lib/content.ts`; page-specific copy inline in each page. There is
   no CMS. Don't invent client names, testimonials, statistics or credentials;
   only use facts the owner has supplied.
 - **Client JS:** keep it minimal. Only `MobileNav` is a client component so far.
-- **Contact form (planned):** a Server Action that validates input and sends an email
-  through a transactional provider (Resend is the likely choice), with a honeypot
-  field for spam. Secrets go in Vercel environment variables, never in the repo.
+- **Contact form:** `contact/actions.ts` validates input, drops honeypot (`website` field)
+  submissions, and sends a plain-text email via the Resend HTTP API (no SDK) with
+  Reply-To set to the sender. Env vars (see `.env.example`): `RESEND_API_KEY` (required),
+  `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL`. Without a key the form shows a "please email
+  me directly" fallback. Secrets live in Vercel env vars, never in the repo.
+- **Owner facts supplied so far:** first name Neil; founded 2025; nearly 25 years in CBT,
+  mostly at vendors; Chair of E-ATP in 2023; sectors IT certification, university
+  entrance, legal, medical, financial. Proud projects and client problems not yet supplied.
 - **Metadata:** set `metadataBase` and a title template in the root layout; each page
   exports its own `metadata` with a title and description.
 - **Workflow:** work on the feature branch; Vercel builds a preview for it. Changes go to

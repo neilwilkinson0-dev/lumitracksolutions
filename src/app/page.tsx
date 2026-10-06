@@ -1,59 +1,19 @@
 import Link from "next/link";
+import { CheckIcon } from "@/components/CheckIcon";
 import { Container } from "@/components/Container";
+import { CtaBand } from "@/components/CtaBand";
 import { LogoMark } from "@/components/LogoMark";
+import { audiences, credential, sectors, services } from "@/lib/content";
 import { site } from "@/lib/site";
-
-// DRAFT COPY: wording to be refined with the owner during the content interview.
-const audiences = [
-  {
-    title: "Awarding bodies",
-    body: "Exam boards and qualification bodies moving to, or getting more from, on-screen assessment.",
-  },
-  {
-    title: "Certification providers",
-    body: "Professional and IT certification programmes delivering exams at scale, in test centres or online.",
-  },
-  {
-    title: "Test platform vendors",
-    body: "Companies building delivery, authoring or proctoring products who want an insider's view of what buyers need.",
-  },
-];
-
-const services = [
-  {
-    title: "Platform selection & procurement",
-    body: "Requirements, RFPs and vendor evaluation, so you choose a platform that fits your programme, not just the demo.",
-  },
-  {
-    title: "Paper-to-screen migration",
-    body: "Planning the move to on-screen or remote delivery, with candidates, centres and regulators kept on side.",
-  },
-  {
-    title: "Delivery operations",
-    body: "Test centres, remote proctoring, scheduling and incident handling: the detail that decides how exam day goes.",
-  },
-  {
-    title: "Item banking & content workflows",
-    body: "Authoring, review and publishing processes, item bank structure and standards such as QTI.",
-  },
-  {
-    title: "Programme reviews",
-    body: "An independent look at an existing programme: what's working, what's at risk and what to change.",
-  },
-  {
-    title: "Advice for vendors",
-    body: "Product direction, market insight and bid readiness from someone who has sat on the buyer's side.",
-  },
-];
 
 const reasons = [
   {
-    title: "I've done the job",
-    body: `${site.yearsInIndustry[0].toUpperCase()}${site.yearsInIndustry.slice(1)} years working in computer-based testing means I've usually seen your problem before, and what fixed it.`,
+    title: "I've seen it from the inside",
+    body: "Most of my career has been at assessment vendors, working closely with providers large and small. I know how both sides think.",
   },
   {
-    title: "Independent advice",
-    body: "I don't resell platforms or take referral fees, so my recommendations are made in your interests alone.",
+    title: "Every part of the process",
+    body: "Test centres, client support, content, assessment design, product and AI. I've worked across all of it.",
   },
   {
     title: "You work with me",
@@ -68,7 +28,7 @@ const reasons = [
 const steps = [
   { title: "We talk", body: "A free, no-obligation call about where you are and what you need." },
   { title: "I propose", body: "A clear scope, timeline and fee, agreed before any work begins." },
-  { title: "We get it done", body: "Short advisory pieces or longer projects, with practical outputs your team can use." },
+  { title: "We get it done", body: "Short advisory pieces or defined projects, with practical outputs your team can use." },
 ];
 
 export default function Home() {
@@ -89,9 +49,10 @@ export default function Home() {
               .
             </h1>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-ink-soft">
-              I&apos;ve spent {site.yearsInIndustry} years in computer-based testing. Now I help
-              awarding bodies, certification providers and platform vendors around the world
-              make better decisions, avoid costly mistakes and deliver exams that work.
+              Hi, I&apos;m {site.owner}. I&apos;ve spent {site.yearsInIndustry} years in
+              computer-based testing, from setting up test centres to leading AI product teams.
+              Now I help awarding bodies, certification providers and platform vendors around the
+              world design, deliver and improve their assessments.
             </p>
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
               <Link
@@ -112,6 +73,17 @@ export default function Home() {
             <div className="absolute inset-[18%] rounded-full bg-amber/25 blur-3xl" />
             <LogoMark className="relative w-full text-ink" raysClassName="text-amber" />
           </div>
+        </Container>
+      </section>
+
+      {/* Credibility strip */}
+      <section className="border-y border-line bg-white">
+        <Container className="flex flex-col gap-4 py-6 text-sm md:flex-row md:items-center md:justify-between">
+          <p className="font-semibold text-ink">{credential}</p>
+          <p className="text-ink-soft">
+            <span className="text-muted">High-stakes experience in </span>
+            {sectors.join(" · ")}
+          </p>
         </Container>
       </section>
 
@@ -145,18 +117,15 @@ export default function Home() {
           </div>
           <ul className="mt-12 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((s) => (
-              <li key={s.title} className="flex gap-4">
-                <span
-                  aria-hidden="true"
-                  className="mt-1 flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-amber-soft text-amber-deep"
-                >
-                  <svg viewBox="0 0 16 16" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M3 8.5l3 3 7-7" />
-                  </svg>
-                </span>
+              <li key={s.slug} className="flex gap-4">
+                <CheckIcon className="mt-1" />
                 <div>
-                  <h3 className="text-lg font-semibold">{s.title}</h3>
-                  <p className="mt-1.5 leading-relaxed text-ink-soft">{s.body}</p>
+                  <h3 className="text-lg font-semibold">
+                    <Link href={`/services#${s.slug}`} className="hover:text-amber-deep">
+                      {s.title}
+                    </Link>
+                  </h3>
+                  <p className="mt-1.5 leading-relaxed text-ink-soft">{s.summary}</p>
                 </div>
               </li>
             ))}
@@ -179,8 +148,8 @@ export default function Home() {
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-ink-soft">
               Computer-based testing has changed enormously in the last two and a half decades.
-              I&apos;ve worked through those changes, and I bring that experience to every
-              conversation.
+              I&apos;ve worked through those changes, in almost every role the industry has, and
+              I bring that experience to every conversation.
             </p>
             <Link
               href="/about"
@@ -220,32 +189,7 @@ export default function Home() {
         </Container>
       </section>
 
-      {/* CTA */}
-      <section className="pb-24">
-        <Container>
-          <div className="relative overflow-hidden rounded-3xl bg-amber-soft px-8 py-12 sm:px-12">
-            <LogoMark
-              className="pointer-events-none absolute -bottom-24 -right-16 hidden h-72 w-72 text-amber-deep/10 md:block"
-              raysClassName="text-amber/60"
-            />
-            <div className="relative max-w-xl">
-              <h2 className="font-display text-2xl font-semibold tracking-tight sm:text-3xl">
-                Got a testing challenge on your mind?
-              </h2>
-              <p className="mt-3 text-ink-soft">
-                Tell me about it. A first conversation is free, and you&apos;ll come away with
-                something useful either way.
-              </p>
-              <Link
-                href="/contact"
-                className="mt-7 inline-block rounded-full bg-ink px-6 py-3 font-semibold text-white transition-colors hover:bg-ink-soft"
-              >
-                Get in touch
-              </Link>
-            </div>
-          </div>
-        </Container>
-      </section>
+      <CtaBand />
     </>
   );
 }

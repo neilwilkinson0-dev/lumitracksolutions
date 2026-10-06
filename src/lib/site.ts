@@ -4,7 +4,10 @@ export const site = {
   url: "https://lumitracksolutions.co.uk",
   description:
     "Independent computer-based testing consultancy for awarding bodies, certification providers and test platform vendors worldwide.",
+  owner: "Neil",
+  founded: 2025,
   yearsInIndustry: "nearly 25",
+  email: "neil@lumitracksolutions.co.uk",
 };
 
 export const nav = [
