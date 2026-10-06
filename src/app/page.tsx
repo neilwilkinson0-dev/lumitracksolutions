@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Container } from "@/components/Container";
+import { LogoMark } from "@/components/LogoMark";
 import { site } from "@/lib/site";
 
 // DRAFT COPY: service areas and wording are placeholders for review.
@@ -56,9 +57,9 @@ export default function Home() {
     <>
       {/* Hero */}
       <section className="relative overflow-hidden bg-navy-deep text-white">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -right-40 -top-40 h-[34rem] w-[34rem] rounded-full bg-amber/20 blur-3xl"
+        <LogoMark
+          className="pointer-events-none absolute -right-24 top-1/2 hidden h-[36rem] w-[36rem] -translate-y-1/2 text-white/[0.06] lg:block"
+          raysClassName="text-amber/40"
         />
         <Container className="relative py-24 sm:py-32">
           <p className="text-sm font-semibold uppercase tracking-[0.18em] text-amber">
