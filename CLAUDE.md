@@ -11,7 +11,7 @@ WordPress site at lumitracksolutions.co.uk.
 
 - Next.js 16 (App Router), React 19, TypeScript (strict)
 - Tailwind CSS v4 (CSS-first config in `src/app/globals.css`; no `tailwind.config`)
-- Fonts via `next/font/google`: Inter (body, `font-sans`), Fraunces (headings, `font-display`)
+- Fonts via `next/font/google`: Inter (body, `font-sans`), Outfit (headings and wordmark, `font-display`)
 - Hosted on Vercel. No CMS, no database: content lives in the code.
 
 ## Commands
@@ -24,13 +24,15 @@ WordPress site at lumitracksolutions.co.uk.
 ## Structure
 
 ```
+brand/              Original logo files as supplied
 src/
   app/
     layout.tsx      Root layout: fonts, default metadata, Header/Footer
     page.tsx        Home
     globals.css     Tailwind import + brand theme tokens
+    icon.svg        Favicon
     (services/, about/, contact/ to follow)
-  components/       Shared UI (Container, Header, MobileNav, Footer, Logo)
+  components/       Shared UI (Container, Header, MobileNav, Footer, Logo, LogoMark)
   lib/site.ts       Site-wide constants: name, URL, description, nav links
 ```
 
@@ -43,7 +45,9 @@ src/
 - **Look:** clean, professional and minimal. Deep navy (`navy`, `navy-deep`, `ink`)
   with a warm amber accent (`amber`). Colour tokens are defined in `@theme` in
   `globals.css`; use them (`bg-navy`, `text-ink-soft` and so on), not raw hex values.
-- **Logo:** `components/Logo.tsx` is a placeholder SVG wordmark until a real logo is supplied.
+- **Logo:** the supplied originals (black PNGs) are in `brand/`. `components/LogoMark.tsx` is the
+  sun-and-clipboard icon redrawn as SVG so it can be recoloured (rays default to amber);
+  `components/Logo.tsx` pairs it with the wordmark set in Outfit. `app/icon.svg` is the favicon.
 - **Content:** page copy lives inline in each page as small arrays/objects. There is
   no CMS. Don't invent client names, testimonials, statistics or credentials;
   only use facts the owner has supplied.
@@ -53,3 +57,5 @@ src/
   field for spam. Secrets go in Vercel environment variables, never in the repo.
 - **Metadata:** set `metadataBase` and a title template in the root layout; each page
   exports its own `metadata` with a title and description.
+- **Workflow:** work on the feature branch; Vercel builds a preview for it. Changes go to
+  `main` (the live site) only once the owner has approved them.
