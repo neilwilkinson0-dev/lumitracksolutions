@@ -3,7 +3,7 @@ export const site = {
   legalName: "Lumitrack Solutions Ltd",
   url: "https://lumitracksolutions.co.uk",
   description:
-    "Independent consultancy for organisations delivering computer-based tests, from a practitioner with nearly 25 years in the industry.",
+    "Independent computer-based testing consultancy for awarding bodies, certification providers and test platform vendors worldwide.",
   yearsInIndustry: "nearly 25",
 };
 

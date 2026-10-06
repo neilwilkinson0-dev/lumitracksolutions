@@ -42,9 +42,13 @@ src/
   contact form submission.
 - **Voice:** first person ("I help..."), since this is a sole-practitioner consultancy.
   UK English spelling throughout.
-- **Look:** clean, professional and minimal. Deep navy (`navy`, `navy-deep`, `ink`)
-  with a warm amber accent (`amber`). Colour tokens are defined in `@theme` in
-  `globals.css`; use them (`bg-navy`, `text-ink-soft` and so on), not raw hex values.
+- **Look:** light, bright and warm; personal and approachable first, modern second.
+  Warm off-white (`paper`, `cream`), dark `ink` text and the logo's amber (`amber`,
+  `amber-soft`, `amber-mark`). Use `amber-deep` for small amber text (contrast).
+  Colour tokens are defined in `@theme` in `globals.css`; use them, not raw hex values.
+  No photo of the owner on the site.
+- **Audience:** awarding bodies, certification providers and test platform vendors,
+  internationally. Engagements are short advisory pieces or defined projects.
 - **Logo:** the supplied originals (black PNGs) are in `brand/`. `components/LogoMark.tsx` is the
   sun-and-clipboard icon redrawn as SVG so it can be recoloured (rays default to amber);
   `components/Logo.tsx` pairs it with the wordmark set in Outfit. `app/icon.svg` is the favicon.

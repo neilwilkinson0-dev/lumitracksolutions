@@ -25,7 +25,7 @@ export function MobileNav() {
         <nav
           id="mobile-menu"
           aria-label="Main"
-          className="absolute inset-x-0 top-16 border-b border-line bg-white px-5 py-4 shadow-sm"
+          className="absolute inset-x-0 top-18 border-b border-line bg-paper px-5 py-4 shadow-sm"
         >
           <ul className="flex flex-col gap-1">
             {nav.map((item) => (
@@ -33,7 +33,7 @@ export function MobileNav() {
                 <Link
                   href={item.href}
                   onClick={() => setOpen(false)}
-                  className="block rounded-md px-2 py-2.5 font-medium text-ink hover:bg-mist"
+                  className="block rounded-md px-2 py-2.5 font-medium text-ink hover:bg-cream"
                 >
                   {item.label}
                 </Link>

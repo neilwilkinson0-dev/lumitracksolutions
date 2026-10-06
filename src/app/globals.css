@@ -4,17 +4,18 @@
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-outfit), ui-sans-serif, system-ui, sans-serif;
 
-  /* Brand palette: deep navy ink with a warm "lumi" amber accent. */
-  --color-ink: #0e1b2c;
-  --color-ink-soft: #3a4a5e;
-  --color-muted: #66768a;
-  --color-line: #e3e7ec;
-  --color-paper: #ffffff;
-  --color-mist: #f5f7f9;
-  --color-navy: #13304f;
-  --color-navy-deep: #0b2038;
-  --color-amber: #e9a23b;
-  --color-amber-soft: #fbf1e1;
+  /* Brand palette: light and warm. Ink for text, amber from the logo's sun.
+     Use amber-deep (not amber) for small amber text so it meets contrast. */
+  --color-ink: #1c2533;
+  --color-ink-soft: #4a5566;
+  --color-muted: #6b7686;
+  --color-line: #ece6dc;
+  --color-paper: #fffdf9;
+  --color-cream: #fbf5ea;
+  --color-amber: #f2a531;
+  --color-amber-soft: #fdecd0;
+  --color-amber-mark: #f9cf8a;
+  --color-amber-deep: #9a5f06;
 }
 
 html {

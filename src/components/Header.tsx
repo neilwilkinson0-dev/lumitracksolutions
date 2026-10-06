@@ -6,8 +6,8 @@ import { MobileNav } from "./MobileNav";
 
 export function Header() {
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-white/90 backdrop-blur">
-      <Container className="flex h-16 items-center justify-between">
+    <header className="sticky top-0 z-40 border-b border-line bg-paper/90 backdrop-blur">
+      <Container className="flex h-18 items-center justify-between">
         <Logo />
         <nav aria-label="Main" className="hidden items-center gap-8 md:flex">
           {nav.map((item) => (
@@ -21,7 +21,7 @@ export function Header() {
           ))}
           <Link
             href="/contact"
-            className="rounded-full bg-navy px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-navy-deep"
+            className="rounded-full bg-ink px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-ink-soft"
           >
             Get in touch
           </Link>
