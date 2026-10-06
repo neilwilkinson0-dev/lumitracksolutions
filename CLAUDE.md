@@ -36,7 +36,7 @@ src/
     icon.svg        Favicon
   components/       Shared UI (Container, Header, MobileNav, Footer, Logo, LogoMark,
                     PageHeader, CtaBand, CheckIcon)
-  lib/site.ts       Site-wide constants: name, owner, email, URL, nav links
+  lib/site.ts       Site-wide constants: name, owner, URL, nav links
   lib/content.ts    Shared content: services, sectors, audiences, credential, career
 ```
 
@@ -62,9 +62,9 @@ src/
 - **Client JS:** keep it minimal. Only `MobileNav` is a client component so far.
 - **Contact form:** `contact/actions.ts` validates input, drops honeypot (`website` field)
   submissions, and sends a plain-text email via the Resend HTTP API (no SDK) with
-  Reply-To set to the sender. Env vars (see `.env.example`): `RESEND_API_KEY` (required),
-  `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL`. Without a key the form shows a "please email
-  me directly" fallback. Secrets live in Vercel env vars, never in the repo.
+  Reply-To set to the sender. Env vars (see `.env.example`): `RESEND_API_KEY` and `CONTACT_TO_EMAIL` (both required),
+  `CONTACT_FROM_EMAIL` (optional). Without them the form shows a "try again later" error.
+  The owner does not want their email address shown anywhere on the site or in the code. Secrets live in Vercel env vars, never in the repo.
 - **Owner facts supplied so far:** first name Neil; founded 2025; nearly 25 years in CBT,
   mostly at vendors; Chair of E-ATP in 2023; sectors IT certification, university
   entrance, legal, medical, financial. Proud projects and client problems not yet supplied.

@@ -27,11 +27,12 @@ export default function ContactPage() {
           <aside className="space-y-6">
             <div className="rounded-2xl border border-line bg-white p-7">
               <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-muted">
-                Prefer email?
+                What happens next
               </h2>
-              <a href={`mailto:${site.email}`} className="mt-3 block break-all font-semibold text-amber-deep hover:text-ink">
-                {site.email}
-              </a>
+              <p className="mt-3 leading-relaxed text-ink-soft">
+                Your message comes straight to me. I&apos;ll read it and reply personally to
+                arrange a conversation.
+              </p>
             </div>
             <div className="rounded-2xl bg-cream p-7">
               <h2 className="text-sm font-semibold uppercase tracking-[0.14em] text-muted">

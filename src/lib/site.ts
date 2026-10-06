@@ -7,7 +7,6 @@ export const site = {
   owner: "Neil",
   founded: 2025,
   yearsInIndustry: "nearly 25",
-  email: "neil@lumitracksolutions.co.uk",
 };
 
 export const nav = [

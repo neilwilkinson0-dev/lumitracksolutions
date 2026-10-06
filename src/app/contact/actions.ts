@@ -41,17 +41,17 @@ export async function sendContact(
   }
 
   const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.CONTACT_TO_EMAIL || site.email;
+  const to = process.env.CONTACT_TO_EMAIL;
   const from = process.env.CONTACT_FROM_EMAIL || `${site.name} website <website@lumitracksolutions.co.uk>`;
 
   const failure: ContactState = {
     status: "error",
-    message: `Sorry, your message couldn't be sent. Please email me directly at ${site.email}.`,
+    message: "Sorry, your message couldn't be sent just now. Please try again in a little while.",
     values,
   };
 
-  if (!apiKey) {
-    console.error("Contact form: RESEND_API_KEY is not set");
+  if (!apiKey || !to) {
+    console.error("Contact form: RESEND_API_KEY or CONTACT_TO_EMAIL is not set");
     return failure;
   }
 

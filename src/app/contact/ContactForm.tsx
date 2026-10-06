@@ -15,7 +15,7 @@ export function ContactForm() {
     return (
       <div role="status" className="rounded-2xl bg-amber-soft p-8">
         <h2 className="font-display text-2xl font-semibold">Thanks, message received.</h2>
-        <p className="mt-2 text-ink-soft">I&apos;ll get back to you as soon as I can, usually within a couple of working days.</p>
+        <p className="mt-2 text-ink-soft">I&apos;ll get back to you as soon as I can.</p>
       </div>
     );
   }
