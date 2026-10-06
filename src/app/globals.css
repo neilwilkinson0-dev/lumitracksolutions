@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+
+  /* Brand palette: deep navy ink with a warm "lumi" amber accent. */
+  --color-ink: #0e1b2c;
+  --color-ink-soft: #3a4a5e;
+  --color-muted: #66768a;
+  --color-line: #e3e7ec;
+  --color-paper: #ffffff;
+  --color-mist: #f5f7f9;
+  --color-navy: #13304f;
+  --color-navy-deep: #0b2038;
+  --color-amber: #e9a23b;
+  --color-amber-soft: #fbf1e1;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+::selection {
+  background: var(--color-amber-soft);
+}

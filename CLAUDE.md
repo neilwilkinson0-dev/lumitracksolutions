@@ -1,0 +1,55 @@
+@AGENTS.md
+
+# Lumitrack Solutions website
+
+Marketing site for **Lumitrack Solutions Ltd**, an independent consultancy for
+organisations delivering computer-based tests (CBT). The owner has nearly 25 years
+in the industry. Audience: prospective clients. It replaces a placeholder
+WordPress site at lumitracksolutions.co.uk.
+
+## Stack
+
+- Next.js 16 (App Router), React 19, TypeScript (strict)
+- Tailwind CSS v4 (CSS-first config in `src/app/globals.css`; no `tailwind.config`)
+- Fonts via `next/font/google`: Inter (body, `font-sans`), Fraunces (headings, `font-display`)
+- Hosted on Vercel. No CMS, no database: content lives in the code.
+
+## Commands
+
+- `npm run dev`: local dev server on http://localhost:3000
+- `npm run lint`: ESLint (Next core-web-vitals + TypeScript rules)
+- `npx tsc --noEmit`: typecheck
+- `npm run build`: production build (run before pushing)
+
+## Structure
+
+```
+src/
+  app/
+    layout.tsx      Root layout: fonts, default metadata, Header/Footer
+    page.tsx        Home
+    globals.css     Tailwind import + brand theme tokens
+    (services/, about/, contact/ to follow)
+  components/       Shared UI (Container, Header, MobileNav, Footer, Logo)
+  lib/site.ts       Site-wide constants: name, URL, description, nav links
+```
+
+## Decisions
+
+- **Pages:** Home, Services, About, Contact. Every page is static except the
+  contact form submission.
+- **Voice:** first person ("I help..."), since this is a sole-practitioner consultancy.
+  UK English spelling throughout.
+- **Look:** clean, professional and minimal. Deep navy (`navy`, `navy-deep`, `ink`)
+  with a warm amber accent (`amber`). Colour tokens are defined in `@theme` in
+  `globals.css`; use them (`bg-navy`, `text-ink-soft` and so on), not raw hex values.
+- **Logo:** `components/Logo.tsx` is a placeholder SVG wordmark until a real logo is supplied.
+- **Content:** page copy lives inline in each page as small arrays/objects. There is
+  no CMS. Don't invent client names, testimonials, statistics or credentials;
+  only use facts the owner has supplied.
+- **Client JS:** keep it minimal. Only `MobileNav` is a client component so far.
+- **Contact form (planned):** a Server Action that validates input and sends an email
+  through a transactional provider (Resend is the likely choice), with a honeypot
+  field for spam. Secrets go in Vercel environment variables, never in the repo.
+- **Metadata:** set `metadataBase` and a title template in the root layout; each page
+  exports its own `metadata` with a title and description.
