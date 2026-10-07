@@ -11,6 +11,25 @@ export type ContactState = {
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+/**
+ * Read an env var, tolerating common paste mistakes: surrounding whitespace or
+ * quotes, a pasted "NAME=" prefix and a "mailto:" prefix.
+ */
+function env(name: string) {
+  return (process.env[name] ?? "")
+    .trim()
+    .replace(new RegExp(`^${name}\\s*=\\s*`), "")
+    .replace(/^["']|["']$/g, "")
+    .replace(/^mailto:/i, "")
+    .trim();
+}
+
+// Accepts "email@example.com" or "Name <email@example.com>".
+function isAddress(value: string) {
+  const match = value.match(/<([^>]+)>$/);
+  return EMAIL_RE.test(match ? match[1] : value);
+}
+
 function field(formData: FormData, key: string, max: number) {
   const value = formData.get(key);
   return typeof value === "string" ? value.trim().slice(0, max) : "";
@@ -40,9 +59,9 @@ export async function sendContact(
     return { status: "error", errors, values };
   }
 
-  const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.CONTACT_TO_EMAIL;
-  const from = process.env.CONTACT_FROM_EMAIL || `${site.name} website <website@lumitracksolutions.co.uk>`;
+  const apiKey = env("RESEND_API_KEY");
+  const to = env("CONTACT_TO_EMAIL");
+  const from = env("CONTACT_FROM_EMAIL") || `${site.name} website <website@lumitracksolutions.co.uk>`;
 
   const failure: ContactState = {
     status: "error",
@@ -52,6 +71,14 @@ export async function sendContact(
 
   if (!apiKey || !to) {
     console.error("Contact form: RESEND_API_KEY or CONTACT_TO_EMAIL is not set");
+    return failure;
+  }
+  if (!isAddress(to) || !isAddress(from)) {
+    // Don't log the values themselves; CONTACT_TO_EMAIL is meant to stay private.
+    console.error(
+      `Contact form: ${!isAddress(to) ? "CONTACT_TO_EMAIL" : "CONTACT_FROM_EMAIL"} is not a valid email address. ` +
+        "Re-enter it in Vercel as just the address, e.g. name@example.com, with no quotes or spaces.",
+    );
     return failure;
   }
 
